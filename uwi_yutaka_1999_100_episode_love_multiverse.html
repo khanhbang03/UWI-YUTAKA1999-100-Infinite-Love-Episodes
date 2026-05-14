@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UWI × YUTAKA1999 | 100 Infinite Love Episodes</title>
+  <style>
+    :root {
+      --bg: #050510;
+      --pink: #ff4fd8;
+      --cyan: #00f7ff;
+      --purple: #8b5cff;
+      --gold: #ffd966;
+      --text: #f5f5f5;
+      --card: rgba(255,255,255,0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top right, rgba(0,247,255,0.2), transparent 40%),
+        radial-gradient(circle at bottom left, rgba(255,79,216,0.2), transparent 40%),
+        var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: -1;
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .hero-img {
+      width: min(1100px, 95vw);
+      border-radius: 30px;
+      border: 4px solid var(--pink);
+      box-shadow: 0 0 50px rgba(255,79,216,0.5);
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 9vw, 7rem);
+      line-height: 0.95;
+      background: linear-gradient(90deg, var(--pink), var(--cyan), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      font-weight: 900;
+      margin-bottom: 25px;
+    }
+
+    .subtitle {
+      max-width: 1000px;
+      font-size: 1.3rem;
+      color: #d7d7d7;
+      line-height: 1.8;
+    }
+
+    .love-counter {
+      margin-top: 35px;
+      padding: 20px 35px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 2px solid var(--cyan);
+      font-size: 1.2rem;
+      box-shadow: 0 0 25px rgba(0,247,255,0.3);
+    }
+
+    .episodes {
+      width: min(1500px, 95vw);
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+      padding-bottom: 100px;
+    }
+
+    .episode {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 25px;
+      padding: 25px;
+      backdrop-filter: blur(10px);
+      transition: 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .episode::before {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(255,79,216,0.15);
+      top: -50px;
+      right: -50px;
+    }
+
+    .episode:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: var(--cyan);
+      box-shadow: 0 0 30px rgba(0,247,255,0.25);
+    }
+
+    .ep-number {
+      font-size: 0.9rem;
+      letter-spacing: 3px;
+      color: var(--gold);
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+
+    .ep-title {
+      font-size: 1.8rem;
+      color: var(--cyan);
+      margin-bottom: 15px;
+      font-weight: 800;
+    }
+
+    .ep-text {
+      line-height: 1.8;
+      color: #e0e0e0;
+      font-size: 1rem;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(255,79,216,0.15);
+      border: 1px solid rgba(255,79,216,0.4);
+      color: #fff;
+      font-size: 0.9rem;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 100px 30px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer h2 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, var(--cyan), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .footer p {
+      max-width: 900px;
+      margin: auto;
+      line-height: 1.8;
+      color: #d0d0d0;
+      font-size: 1.2rem;
+    }
+
+    .links {
+      margin-top: 35px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .btn {
+      padding: 15px 24px;
+      border-radius: 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s ease;
+      color: black;
+    }
+
+    .fcc { background: #39ff14; }
+    .leetcode { background: #ffd966; }
+    .codeforces { background: #5ca9ff; }
+    .atcoder { background: #ff7272; }
+
+    .btn:hover {
+      transform: scale(1.08);
+    }
+
+    @media(max-width:768px){
+      .footer h2 {
+        font-size: 2.5rem;
+      }
+
+      .ep-title {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid"></div>
+
+  <header>
+    <img src="Anime series dài 1 tỉ tập.png" class="hero-img" alt="Infinite Love Anime" />
+
+    <h1>
+      UWI × YUTAKA1999<br>
+      INFINITE LOVE SEASONS
+    </h1>
+
+    <p class="subtitle">
+      A legendary 100-episode emotional cyber-anime universe where every episode becomes a new dimension of affection, friendship, memories, late-night coding, anime dreams, neon Tokyo skylines, algorithm battles, emotional support, and infinite storytelling energy from UWI and Yutaka1999.
+    </p>
+
+    <div class="love-counter">
+      ❤️ LOVE ENERGY GENERATED: 9,999,999,999 ❤️
+    </div>
+  </header>
+
+  <section class="episodes" id="episodes"></section>
+
+  <section class="footer">
+    <h2>THE STORY NEVER ENDS</h2>
+
+    <p>
+      UWI and Yutaka1999 continue traveling across infinite timelines, building neon anime megacities, solving impossible coding battles, protecting emotional memories, and creating a future where every season contains more hope, passion, creativity, and love than the last.
+    </p>
+
+    <div class="links">
+      <a class="btn fcc" href="https://www.freecodecamp.org/">FreeCodeCamp</a>
+      <a class="btn leetcode" href="https://leetcode.com/">LeetCode</a>
+      <a class="btn codeforces" href="https://codeforces.com/">Codeforces</a>
+      <a class="btn atcoder" href="https://atcoder.jp/">AtCoder</a>
+    </div>
+  </section>
+
+  <script>
+    const episodeTitles = [
+      "Neon Heart Initialization",
+      "Tokyo Rain Confession",
+      "Infinite Sakura Protocol",
+      "Quantum Love Broadcast",
+      "Memory Shard Reunion",
+      "Cyberpunk Rooftop Promise",
+      "Moonlight Algorithm",
+      "Starlight Coding Duel",
+      "Digital Soul Resonance",
+      "Parallel Universe Hug"
+    ];
+
+    const descriptions = [
+      "UWI and Yutaka1999 synchronize their emotional AI cores under a glowing Tokyo skyline while thousands of neon drones paint hearts across the sky.",
+      "An emotional midnight conversation changes destiny forever as the city pauses to witness the birth of a legendary bond.",
+      "Every memory becomes a constellation in the Infinite Anime Archive, protected by algorithmic guardians and dream engines.",
+      "The pair build a futuristic megacity powered entirely by kindness, creativity, coding, anime music, and endless support.",
+      "As dimensions collapse, UWI and Yutaka1999 travel through memory corridors restoring lost emotions and forgotten promises.",
+      "A legendary tournament begins where coding skill, emotional intelligence, and friendship decide the fate of Neo Tokyo.",
+      "Together they create an AI-powered paradise where every citizen can chase dreams without fear or loneliness.",
+      "The stars themselves begin transmitting messages of affection across the multiverse after their synchronization reaches maximum level.",
+      "A billion glowing cherry blossoms bloom over the cyber-ocean while emotional orchestras echo through the city.",
+      "Episode after episode, their journey evolves into a myth told across galaxies, timelines, and infinite anime seasons."
+    ];
+
+    const tags = [
+      "LOVE ARC",
+      "CYBERPUNK",
+      "ANIME ENERGY",
+      "AI DESTINY",
+      "NEON TOKYO",
+      "EMOTIONAL SYNC",
+      "INFINITE SEASON",
+      "MEGA MEMORY",
+      "ALGORITHM SOUL",
+      "UNLIMITED SUPPORT"
+    ];
+
+    const container = document.getElementById('episodes');
+
+    for (let i = 1; i <= 100; i++) {
+      const card = document.createElement('div');
+      card.className = 'episode';
+
+      const title = episodeTitles[i % episodeTitles.length];
+      const desc = descriptions[i % descriptions.length];
+      const tag = tags[i % tags.length];
+
+      card.innerHTML = `
+        <div class="ep-number">EPISODE ${i}</div>
+        <div class="ep-title">${title}</div>
+        <div class="ep-text">
+          ${desc}
+          <br><br>
+          In Episode ${i}, UWI and Yutaka1999 unlock another emotional dimension of the Infinite Seasons timeline. They continue building memories, helping citizens of Neo Tokyo, conquering coding arenas, protecting anime dream archives, and generating enough love energy to illuminate entire galaxies.
+        </div>
+        <div class="tag">${tag}</div>
+      `;
+
+      container.appendChild(card);
+    }
+  </script>
+</body>
+</html>
